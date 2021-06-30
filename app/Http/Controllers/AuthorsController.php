@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Author;
 use Illuminate\Http\Request;
 use App\Http\Resources\AuthorResource;
-use App\Http\Requests\AuthorRequests;
+use App\Http\Requests\AuthorsRequest;
 
 class AuthorsController extends Controller
 {

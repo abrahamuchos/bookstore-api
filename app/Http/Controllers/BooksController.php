@@ -97,8 +97,10 @@ class BooksController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Book $book)
+    public function destroy(Book $book): object
     {
-        //
+        $book->delete();
+
+        return response()->json(true);
     }
 }
