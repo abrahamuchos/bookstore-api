@@ -1,5 +1,8 @@
 # Bookstore API
 
+Bookstore API is a project developed in Laravel 8 and Passport with the sole purpose of being used as a practice and guide for those who are starting out.
+
+This project serves as a brief reference to basic uses of Laravel and the use of OAuth.
 
 ## ✅ Features
 
