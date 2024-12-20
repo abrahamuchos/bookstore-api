@@ -1,0 +1,1464 @@
+{
+	"info": {
+		"_postman_id": "17bfc202-82b1-4327-9abf-7d4450f6cf92",
+		"name": "Bookstore API",
+		"description": "The Bookstore is an API where the user can view, add, edit and delete a list of books and also users. This is provided to keep track of the list of books and authors that we have registered.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6168326"
+	},
+	"item": [
+		{
+			"name": "Oauth Token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "SCwL3BDvyccAtzUE41Tbipp9wwVELGhOvyhN60pz",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "j.abraham.29@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/oauth/token",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"oauth",
+						"token"
+					]
+				},
+				"description": "### HTTP POST /oauth/token\n\nThis endpoint is used to obtain an access token by providing client credentials.\n\nCheck information (Readme.md) about _client_secret._\n\n#### Response\n\n- **Status:** 200\n    \n- **Content-Type:** application/json\n    \n- The response contains the following keys:\n    \n    - `token_type`: The type of token issued.\n        \n    - `expires_in`: The duration in seconds for which the access token is valid.\n        \n    - `access_token`: The access token to be used for accessing protected resources.\n        \n    - `refresh_token`: A token that can be used to obtain a new access token when the current access token expires."
+			},
+			"response": []
+		},
+		{
+			"name": "User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/v1/user",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"user"
+					]
+				},
+				"description": "## Retrieve User Information\n\nThis endpoint allows you to retrieve user information.\n\n### Request\n\n- Method: GET\n    \n- Endpoint: `http://127.0.0.1:8000/api/v1/user`\n    \n\n### Response\n\nThe response will include the following user information:\n\n- `id` (number): The unique identifier for the user.\n    \n- `name` (string): The name of the user.\n    \n- `email` (string): The email address of the user.\n    \n- `email_verified_at` (string): The timestamp when the user's email was verified.\n    \n- `created_at` (string): The timestamp when the user account was created.\n    \n- `updated_at` (string): The timestamp when the user account was last updated."
+			},
+			"response": [
+				{
+					"name": "User",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/user",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.3.7"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 20 Dec 2024 17:17:50 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"name\": \"Abraham Gonzalez\",\n    \"email\": \"abraham@mail.com\",\n    \"email_verified_at\": null,\n    \"created_at\": \"2024-12-20T17:08:04.000000Z\",\n    \"updated_at\": \"2024-12-20T17:08:04.000000Z\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Authors",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url_v1}}/authors",
+					"host": [
+						"{{url_v1}}"
+					],
+					"path": [
+						"authors"
+					]
+				},
+				"description": "# Get Authors\n\nThis endpoint retrieves a list of authors.\n\n## Request\n\n- Method: GET\n    \n- URL: localhost:8000/api/v1/authors\n    \n\n## Response\n\nThe response will be a JSON object with a `data` array containing author information. Each author object in the array will have the following attributes:\n\n- `id` (string): The unique identifier of the author.\n    \n- `type` (string): The type of the author.\n    \n- `attributes` (object): An object containing the following attributes:\n    \n    - `name` (string): The name of the author.\n        \n    - `created_at` (string): The timestamp when the author was created.\n        \n    - `updated_at` (string): The timestamp when the author was last updated.\n        \n\n### JSON Schema\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"data\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"id\": { \"type\": \"string\" },\n          \"type\": { \"type\": \"string\" },\n          \"attributes\": {\n            \"type\": \"object\",\n            \"properties\": {\n              \"name\": { \"type\": \"string\" },\n              \"created_at\": { \"type\": \"string\" },\n              \"updated_at\": { \"type\": \"string\" }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n\n ```"
+			},
+			"response": [
+				{
+					"name": "Authors",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_v1}}/authors",
+							"host": [
+								"{{url_v1}}"
+							],
+							"path": [
+								"authors"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.3.7"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 20 Dec 2024 17:18:37 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"type\": \"Author\",\n            \"attributtes\": {\n                \"name\": \"Prof. Jamil Deckow III\",\n                \"created_at\": \"2024-12-20T17:08:04.000000Z\",\n                \"updated_at\": \"2024-12-20T17:08:04.000000Z\"\n            }\n        },\n        {\n            \"id\": \"2\",\n            \"type\": \"Author\",\n            \"attributtes\": {\n                \"name\": \"Dr. Tobin Dickens Sr.\",\n                \"created_at\": \"2024-12-20T17:08:04.000000Z\",\n                \"updated_at\": \"2024-12-20T17:08:04.000000Z\"\n            }\n        },\n        {\n            \"id\": \"3\",\n            \"type\": \"Author\",\n            \"attributtes\": {\n                \"name\": \"Jayda Schaden\",\n                \"created_at\": \"2024-12-20T17:08:04.000000Z\",\n                \"updated_at\": \"2024-12-20T17:08:04.000000Z\"\n            }\n        },\n        {\n            \"id\": \"4\",\n            \"type\": \"Author\",\n            \"attributtes\": {\n                \"name\": \"Prof. Dianna Lindgren\",\n                \"created_at\": \"2024-12-20T17:08:04.000000Z\",\n                \"updated_at\": \"2024-12-20T17:08:04.000000Z\"\n            }\n        },\n        {\n            \"id\": \"5\",\n            \"type\": \"Author\",\n            \"attributtes\": {\n                \"name\": \"Kiana Kassulke I\",\n                \"created_at\": \"2024-12-20T17:08:04.000000Z\",\n                \"updated_at\": \"2024-12-20T17:08:04.000000Z\"\n            }\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Author",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{url_v1}}/authors/1",
+					"host": [
+						"{{url_v1}}"
+					],
+					"path": [
+						"authors",
+						"1"
+					]
+				},
+				"description": "### GET /authors/1\n\nThis endpoint retrieves information about a specific author.\n\n#### Request\n\nNo request body is required for this endpoint.\n\n- URL Parameters\n    \n    - `1` (number) - The ID of the author to retrieve.\n        \n\n#### Response\n\nThe response will be a JSON object with the following schema:\n\n``` json\n{\n  \"data\": {\n    \"id\": \"string\",\n    \"type\": \"string\",\n    \"attributes\": {\n      \"name\": \"string\",\n      \"created_at\": \"string\",\n      \"updated_at\": \"string\"\n    }\n  }\n}\n\n ```\n\nThe `data` object contains the author's ID, type, and attributes including name, creation date, and last update date.\n\n#### Example Response\n\n``` json\n{\n  \"data\": {\n    \"id\": \"123\",\n    \"type\": \"author\",\n    \"attributes\": {\n      \"name\": \"John Doe\",\n      \"created_at\": \"2022-01-01T12:00:00Z\",\n      \"updated_at\": \"2022-01-10T08:00:00Z\"\n    }\n  }\n}\n\n ```"
+			},
+			"response": [
+				{
+					"name": "Author",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url_v1}}/authors/1",
+							"host": [
+								"{{url_v1}}"
+							],
+							"path": [
+								"authors",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.3.7"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 20 Dec 2024 17:18:58 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": \"1\",\n        \"type\": \"Author\",\n        \"attributtes\": {\n            \"name\": \"Prof. Jamil Deckow III\",\n            \"created_at\": \"2024-12-20T17:08:04.000000Z\",\n            \"updated_at\": \"2024-12-20T17:08:04.000000Z\"\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Author",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Jhonwil Gonzalez",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url_v1}}/authors/1?name=Abraham Gonzalez",
+					"host": [
+						"{{url_v1}}"
+					],
+					"path": [
+						"authors",
+						"1"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Abraham Gonzalez"
+						}
+					]
+				},
+				"description": "### Update Author Details\n\nThis endpoint allows the client to update the details of an author.\n\n#### Request\n\n- Method: PUT\n    \n- URL: {{url_v1}}/authors/1?name=Abraham Gonzalez\n    \n- Body (form-data):\n    \n    - No parameters provided\n        \n\n#### Response\n\n- Status: 200\n    \n- Content-Type: application/json\n    \n\n``` json\n{\n  \"data\": {\n    \"id\": \"\",\n    \"type\": \"\",\n    \"attributtes\": {\n      \"name\": \"\",\n      \"created_at\": \"\",\n      \"updated_at\": \"\"\n    }\n  }\n}\n\n ```\n\n#### JSON Schema\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"data\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"id\": {\"type\": \"string\"},\n        \"type\": {\"type\": \"string\"},\n        \"attributtes\": {\n          \"type\": \"object\",\n          \"properties\": {\n            \"name\": {\"type\": \"string\"},\n            \"created_at\": {\"type\": \"string\"},\n            \"updated_at\": {\"type\": \"string\"}\n          }\n        }\n      }\n    }\n  }\n}\n\n ```"
+			},
+			"response": [
+				{
+					"name": "Author",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Jhonwil Gonzalez",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url_v1}}/authors/1?name=Abraham Gonzalez",
+							"host": [
+								"{{url_v1}}"
+							],
+							"path": [
+								"authors",
+								"1"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Abraham Gonzalez"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.3.7"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 20 Dec 2024 17:50:33 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": \"1\",\n        \"type\": \"Author\",\n        \"attributtes\": {\n            \"name\": \"Abraham Gonzalez\",\n            \"created_at\": \"2024-12-20T17:08:04.000000Z\",\n            \"updated_at\": \"2024-12-20T17:50:33.000000Z\"\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Author",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url_v1}}/authors/?name=Abraham Gonzalez",
+					"host": [
+						"{{url_v1}}"
+					],
+					"path": [
+						"authors",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Abraham Gonzalez"
+						}
+					]
+				},
+				"description": "### Add Author\n\nThis endpoint allows you to add a new author by making an HTTP POST request to the specified URL.\n\n#### Request Body\n\n- `name`: (string) The name of the author to be added.\n    \n\n#### Response\n\nUpon a successful request, the server will respond with the following data:\n\n``` json\n{\n  \"data\": {\n    \"id\": \"\",\n    \"type\": \"\",\n    \"attributtes\": {\n      \"name\": \"\",\n      \"created_at\": \"\",\n      \"updated_at\": \"\"\n    }\n  }\n}\n\n ```\n\nThe response will include the details of the newly added author, including the unique identifier, type, name, creation timestamp, and last update timestamp."
+			},
+			"response": [
+				{
+					"name": "Author",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_v1}}/authors/?name=Abraham Gonzalez",
+							"host": [
+								"{{url_v1}}"
+							],
+							"path": [
+								"authors",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Abraham Gonzalez"
+								}
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.3.7"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 20 Dec 2024 17:19:40 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": \"6\",\n        \"type\": \"Author\",\n        \"attributtes\": {\n            \"name\": \"Abraham Gonzalez\",\n            \"created_at\": \"2024-12-20T17:19:40.000000Z\",\n            \"updated_at\": \"2024-12-20T17:19:40.000000Z\"\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Author",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url_v1}}/authors/6",
+					"host": [
+						"{{url_v1}}"
+					],
+					"path": [
+						"authors",
+						"6"
+					]
+				},
+				"description": "### Delete Author\n\nThis endpoint is used to delete a specific author.\n\n#### Request\n\n- Method: DELETE\n    \n- Endpoint: `{{url_v1}}/authors/6`\n    \n\n#### Response\n\nThe response for this request follows the JSON schema below:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"message\": {\n      \"type\": \"string\"\n    }\n  }\n}\n\n ```\n\nThe response body will contain a message indicating the result of the deletion operation."
+			},
+			"response": [
+				{
+					"name": "Author",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_v1}}/authors/6",
+							"host": [
+								"{{url_v1}}"
+							],
+							"path": [
+								"authors",
+								"6"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.3.7"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 20 Dec 2024 17:20:07 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Books",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url_v1}}/books/",
+					"host": [
+						"{{url_v1}}"
+					],
+					"path": [
+						"books",
+						""
+					]
+				},
+				"description": "### Get Books\n\nThis endpoint retrieves a list of books.\n\n**Request Body**  \nThis request does not require a request body.\n\n**Response Body**  \nThe response will be a JSON object with a `data` array containing objects representing individual books. Each book object will have the following attributes:\n\n- `id` (string): The unique identifier of the book.\n    \n- `type` (string): The type of the book.\n    \n- `attributtes` (object): An object containing the attributes of the book including:\n    \n    - `name` (string): The name of the book.\n        \n    - `author` (array): An array of authors of the book.\n        \n    - `description` (string): The description of the book.\n        \n    - `publication_year` (string): The year of publication of the book.\n        \n    - `created_at` (string): The timestamp of when the book record was created.\n        \n    - `updated_at` (string): The timestamp of when the book record was last updated.\n        \n\nThe response of this request can be documented as the following JSON schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"data\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"id\": { \"type\": \"string\" },\n          \"type\": { \"type\": \"string\" },\n          \"attributtes\": {\n            \"type\": \"object\",\n            \"properties\": {\n              \"name\": { \"type\": \"string\" },\n              \"author\": { \"type\": \"array\" },\n              \"description\": { \"type\": \"string\" },\n              \"publication_year\": { \"type\": \"string\" },\n              \"created_at\": { \"type\": \"string\" },\n              \"updated_at\": { \"type\": \"string\" }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n\n ```"
+			},
+			"response": [
+				{
+					"name": "Books",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_v1}}/books/",
+							"host": [
+								"{{url_v1}}"
+							],
+							"path": [
+								"books",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.3.7"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 20 Dec 2024 17:21:00 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"type\": \"Books\",\n            \"attributtes\": {\n                \"name\": \"Prof. Donny Rippin I\",\n                \"author\": [],\n                \"description\": \"Quia aut aperiam quibusdam vel eum quod.\",\n                \"publication_year\": \"1974\",\n                \"created_at\": \"2024-12-20T17:08:04.000000Z\",\n                \"updated_at\": \"2024-12-20T17:08:04.000000Z\"\n            }\n        },\n        {\n            \"id\": \"2\",\n            \"type\": \"Books\",\n            \"attributtes\": {\n                \"name\": \"Aletha Lowe\",\n                \"author\": [\n                    {\n                        \"id\": 1,\n                        \"name\": \"Prof. Jamil Deckow III\",\n                        \"created_at\": \"2024-12-20T17:08:04.000000Z\",\n                        \"updated_at\": \"2024-12-20T17:08:04.000000Z\",\n                        \"pivot\": {\n                            \"book_id\": 2,\n                            \"author_id\": 1\n                        }\n                    },\n                    {\n                        \"id\": 1,\n                        \"name\": \"Prof. Jamil Deckow III\",\n                        \"created_at\": \"2024-12-20T17:08:04.000000Z\",\n                        \"updated_at\": \"2024-12-20T17:08:04.000000Z\",\n                        \"pivot\": {\n                            \"book_id\": 2,\n                            \"author_id\": 1\n                        }\n                    },\n                    {\n                        \"id\": 2,\n                        \"name\": \"Dr. Tobin Dickens Sr.\",\n                        \"created_at\": \"2024-12-20T17:08:04.000000Z\",\n                        \"updated_at\": \"2024-12-20T17:08:04.000000Z\",\n                        \"pivot\": {\n                            \"book_id\": 2,\n                            \"author_id\": 2\n                        }\n                    }\n                ],\n                \"description\": \"Eius impedit nesciunt porro molestiae.\",\n                \"publication_year\": \"2006\",\n                \"created_at\": \"2024-12-20T17:08:04.000000Z\",\n                \"updated_at\": \"2024-12-20T17:08:04.000000Z\"\n            }\n        },\n        {\n            \"id\": \"3\",\n            \"type\": \"Books\",\n            \"attributtes\": {\n                \"name\": \"Tate Grimes\",\n                \"author\": [\n                    {\n                        \"id\": 4,\n                        \"name\": \"Prof. Dianna Lindgren\",\n                        \"created_at\": \"2024-12-20T17:08:04.000000Z\",\n                        \"updated_at\": \"2024-12-20T17:08:04.000000Z\",\n                        \"pivot\": {\n                            \"book_id\": 3,\n                            \"author_id\": 4\n                        }\n                    }\n                ],\n                \"description\": \"Harum porro animi aut voluptates quaerat eos.\",\n                \"publication_year\": \"1988\",\n                \"created_at\": \"2024-12-20T17:08:04.000000Z\",\n                \"updated_at\": \"2024-12-20T17:08:04.000000Z\"\n            }\n        },\n        {\n            \"id\": \"4\",\n            \"type\": \"Books\",\n            \"attributtes\": {\n                \"name\": \"Llewellyn Auer V\",\n                \"author\": [\n                    {\n                        \"id\": 2,\n                        \"name\": \"Dr. Tobin Dickens Sr.\",\n                        \"created_at\": \"2024-12-20T17:08:04.000000Z\",\n                        \"updated_at\": \"2024-12-20T17:08:04.000000Z\",\n                        \"pivot\": {\n                            \"book_id\": 4,\n                            \"author_id\": 2\n                        }\n                    },\n                    {\n                        \"id\": 3,\n                        \"name\": \"Jayda Schaden\",\n                        \"created_at\": \"2024-12-20T17:08:04.000000Z\",\n                        \"updated_at\": \"2024-12-20T17:08:04.000000Z\",\n                        \"pivot\": {\n                            \"book_id\": 4,\n                            \"author_id\": 3\n                        }\n                    },\n                    {\n                        \"id\": 4,\n                        \"name\": \"Prof. Dianna Lindgren\",\n                        \"created_at\": \"2024-12-20T17:08:04.000000Z\",\n                        \"updated_at\": \"2024-12-20T17:08:04.000000Z\",\n                        \"pivot\": {\n                            \"book_id\": 4,\n                            \"author_id\": 4\n                        }\n                    },\n                    {\n                        \"id\": 5,\n                        \"name\": \"Kiana Kassulke I\",\n                        \"created_at\": \"2024-12-20T17:08:04.000000Z\",\n                        \"updated_at\": \"2024-12-20T17:08:04.000000Z\",\n                        \"pivot\": {\n                            \"book_id\": 4,\n                            \"author_id\": 5\n                        }\n                    },\n                    {\n                        \"id\": 5,\n                        \"name\": \"Kiana Kassulke I\",\n                        \"created_at\": \"2024-12-20T17:08:04.000000Z\",\n                        \"updated_at\": \"2024-12-20T17:08:04.000000Z\",\n                        \"pivot\": {\n                            \"book_id\": 4,\n                            \"author_id\": 5\n                        }\n                    }\n                ],\n                \"description\": \"Et quia quis architecto et iste sed.\",\n                \"publication_year\": \"2010\",\n                \"created_at\": \"2024-12-20T17:08:04.000000Z\",\n                \"updated_at\": \"2024-12-20T17:08:04.000000Z\"\n            }\n        },\n        {\n            \"id\": \"5\",\n            \"type\": \"Books\",\n            \"attributtes\": {\n                \"name\": \"Genesis Donnelly Sr.\",\n                \"author\": [\n                    {\n                        \"id\": 3,\n                        \"name\": \"Jayda Schaden\",\n                        \"created_at\": \"2024-12-20T17:08:04.000000Z\",\n                        \"updated_at\": \"2024-12-20T17:08:04.000000Z\",\n                        \"pivot\": {\n                            \"book_id\": 5,\n                            \"author_id\": 3\n                        }\n                    }\n                ],\n                \"description\": \"Rem iure natus qui blanditiis ipsam.\",\n                \"publication_year\": \"1984\",\n                \"created_at\": \"2024-12-20T17:08:04.000000Z\",\n                \"updated_at\": \"2024-12-20T17:08:04.000000Z\"\n            }\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Book",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url_v1}}/books/1",
+					"host": [
+						"{{url_v1}}"
+					],
+					"path": [
+						"books",
+						"1"
+					]
+				},
+				"description": "### Get Book Details\n\nThis endpoint retrieves the details of a specific book.\n\n#### Request\n\n- Method: GET\n    \n- URL: `{{url_v1}}/books/1`\n    \n\n#### Response\n\nThe response will contain the details of the book in the following format:\n\n``` json\n{\n    \"data\": {\n        \"id\": \"\",\n        \"type\": \"\",\n        \"attributes\": {\n            \"name\": \"\",\n            \"author\": [],\n            \"description\": \"\",\n            \"publication_year\": \"\",\n            \"created_at\": \"\",\n            \"updated_at\": \"\"\n        }\n    }\n}\n\n ```"
+			},
+			"response": [
+				{
+					"name": "Book",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_v1}}/books/1",
+							"host": [
+								"{{url_v1}}"
+							],
+							"path": [
+								"books",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.3.7"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 20 Dec 2024 17:21:48 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": \"1\",\n        \"type\": \"Books\",\n        \"attributtes\": {\n            \"name\": \"Prof. Donny Rippin I\",\n            \"author\": [],\n            \"description\": \"Quia aut aperiam quibusdam vel eum quod.\",\n            \"publication_year\": \"1974\",\n            \"created_at\": \"2024-12-20T17:08:04.000000Z\",\n            \"updated_at\": \"2024-12-20T17:08:04.000000Z\"\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Book",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url_v1}}/books/1?name=Las maravillas del mundo 2&description=this is a description to update book.&publication_year=2021",
+					"host": [
+						"{{url_v1}}"
+					],
+					"path": [
+						"books",
+						"1"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Las maravillas del mundo 2"
+						},
+						{
+							"key": "description",
+							"value": "this is a description to update book."
+						},
+						{
+							"key": "publication_year",
+							"value": "2021"
+						}
+					]
+				},
+				"description": "This endpoint allows you to update the details of a specific book by sending an HTTP PUT request to the specified URL. The request should include the book ID in the URL path and the updated name, description, and publication year as query parameters.\n\n### Request Body\n\n- No request body is required for this endpoint.\n    \n\n### Query Parameters\n\n- `name` (string): The updated name of the book.\n    \n- `description` (string): The updated description of the book.\n    \n- `publication_year` (integer): The updated publication year of the book.\n    \n\n### Response\n\nUpon a successful update, the endpoint will respond with the updated details of the book in the following format:\n\n``` json\n{\n    \"data\": {\n        \"id\": \"\",\n        \"type\": \"\",\n        \"attributes\": {\n            \"name\": \"\",\n            \"author\": [],\n            \"description\": \"\",\n            \"publication_year\": \"\",\n            \"created_at\": \"\",\n            \"updated_at\": \"\"\n        }\n    }\n}\n\n ```\n\nThe `id`, `type`, `name`, `description`, `publication_year`, `created_at`, and `updated_at` fields will contain the updated information of the book."
+			},
+			"response": [
+				{
+					"name": "Book",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_v1}}/books/1?name=Las maravillas del mundo 2&description=this is a description to update book.&publication_year=2021",
+							"host": [
+								"{{url_v1}}"
+							],
+							"path": [
+								"books",
+								"1"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Las maravillas del mundo 2"
+								},
+								{
+									"key": "description",
+									"value": "this is a description to update book."
+								},
+								{
+									"key": "publication_year",
+									"value": "2021"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.3.7"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 20 Dec 2024 17:22:29 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": \"1\",\n        \"type\": \"Books\",\n        \"attributtes\": {\n            \"name\": \"Las maravillas del mundo 2\",\n            \"author\": [],\n            \"description\": \"this is a description to update book.\",\n            \"publication_year\": \"2021\",\n            \"created_at\": \"2024-12-20T17:08:04.000000Z\",\n            \"updated_at\": \"2024-12-20T17:22:29.000000Z\"\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Book",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url_v1}}/books/?name=Nuevo libro&description=Esto es un nuevo libro&publication_year=2020",
+					"host": [
+						"{{url_v1}}"
+					],
+					"path": [
+						"books",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Nuevo libro"
+						},
+						{
+							"key": "description",
+							"value": "Esto es un nuevo libro"
+						},
+						{
+							"key": "publication_year",
+							"value": "2020"
+						}
+					]
+				},
+				"description": "### Endpoint Description\n\nThis endpoint allows the creation of a new book with the provided name, description, and publication year.\n\n### Request Body\n\n- name (string, required): The name of the new book.\n    \n- description (string, required): The description of the new book.\n    \n- publication_year (integer, required): The publication year of the new book.\n    \n\n### Response Body\n\nThe response will be in the form of a JSON schema with the following structure:\n\n``` json\n{\n  \"data\": {\n    \"id\": \"\",\n    \"type\": \"\",\n    \"attributtes\": {\n      \"name\": \"\",\n      \"author\": [],\n      \"description\": \"\",\n      \"publication_year\": \"\",\n      \"created_at\": \"\",\n      \"updated_at\": \"\"\n    }\n  }\n}\n\n ```\n\nThe response will include the ID, type, attributes (name, author, description, publication year, created at, updated at) of the newly created book."
+			},
+			"response": [
+				{
+					"name": "Book",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_v1}}/books/?name=Nuevo libro&description=Esto es un nuevo libro&publication_year=2020",
+							"host": [
+								"{{url_v1}}"
+							],
+							"path": [
+								"books",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Nuevo libro"
+								},
+								{
+									"key": "description",
+									"value": "Esto es un nuevo libro"
+								},
+								{
+									"key": "publication_year",
+									"value": "2020"
+								}
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.3.7"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 20 Dec 2024 17:23:06 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": \"6\",\n        \"type\": \"Books\",\n        \"attributtes\": {\n            \"name\": \"Nuevo libro\",\n            \"author\": [],\n            \"description\": \"Esto es un nuevo libro\",\n            \"publication_year\": \"2020\",\n            \"created_at\": \"2024-12-20T17:23:06.000000Z\",\n            \"updated_at\": \"2024-12-20T17:23:06.000000Z\"\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Book",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url_v1}}/books/4",
+					"host": [
+						"{{url_v1}}"
+					],
+					"path": [
+						"books",
+						"4"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				},
+				"description": "### Delete Book\n\nThis endpoint is used to delete a specific book.\n\n#### Request\n\n- Method: DELETE\n    \n- URL: `{{url_v1}}/books/4`\n    \n\n#### Response\n\nThe response for this request is a boolean value (`true`), indicating the success of the deletion operation.\n\n#### Request Body\n\nThis request does not require a request body.\n\n#### Response Body (JSON Schema)\n\n``` json\n{\n  \"type\": \"boolean\"\n}\n\n ```"
+			},
+			"response": [
+				{
+					"name": "Book",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_v1}}/books/4",
+							"host": [
+								"{{url_v1}}"
+							],
+							"path": [
+								"books",
+								"4"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.3.7"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 20 Dec 2024 17:23:38 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "true"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiMzA3ZmRkZGQzN2ZkYWZlMGE3NTM1YjdmMTAzMmViNjUwYTdhNGM3ODUyNWM3OGRhZDIwNThjYWMyYjRiNTBmM2RmYjRhNTY5NzBkNTNlNDMiLCJpYXQiOjE3MzQ3MTQ2MTkuMjE2MTc5LCJuYmYiOjE3MzQ3MTQ2MTkuMjE2MTgyLCJleHAiOjE3NjYyNTA2MTkuMTAyOTY1LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.zFueHO7NC9MjIi6DkVcDlgXgjEo6QuDHNa2Ee3refxJH4uJ_2zgdLhW0bz-08bqVNAzJxFU-QSvW_62EyDRPuZ2PcWhp0txUghAPok72ly8TJy3E6XRcyO2UhuSSg9bh-Qt3Y-cHsU1T82Ib9k0JLZrruUCn5aWtUofnVQuQxPUQdoVqz4lfY8kz4s9AZIagUpuPUbM5QKcxKj3NWEfBPK3x_qq3XHLfE_Fc--skLEpk_EAyS334rzlFaL9BSbyyy8sUYlak6vwTpYjddUoVxzPr8gpZeAX_YfDbTkHtFji6YO5KXNxz4BwCXRoyl0AHxAMBENZ2RACrAz7OY4B1phAnIStBZ6rbKqzZBxhp2IuocYvZyRt6-yOjWUJ3fTC_JNsNv_2KvPyMoncYIyHPx25-SCFDIvysVKnkWUpTenJCstrBFehSCFhujL_CnPmQKyE13DYYRImFlw6v5D1ZkQft531KIxmPn5xJNnMX1fBKpG78dFsZd7e6GMHg2ixLdhdDwp-5kxyCRiKa0XHcdSbE41w40_JtifHKhAvDlEGIWzwdJDOMWRae04RJJvR_7MxfJbsuXlrEUg2QI8i3uQM2t_W8ce87Xj9NtEcj8XaXfu88l1YLLL3FfWATW6KqRLRvJzc32feQm7eG1A1ZIBxY9gPYccycrzvGYysPKfU"
+		},
+		{
+			"key": "url_v1",
+			"value": "http://127.0.0.1:8000/api/v1",
+			"type": "string"
+		}
+	]
+}
